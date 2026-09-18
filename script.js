@@ -43,6 +43,8 @@
   });
 
   const FORMSPREE_ENDPOINT = 'https://formspree.io/f/maenwoao';
+  const pageLoadedAt = Date.now();
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const form = document.getElementById('contactForm');
   const formError = document.getElementById('formError');
@@ -57,14 +59,36 @@
     const honeypot = document.getElementById('website').value;
     if (honeypot) return;
 
+    // Time-trap: a real person needs at least a couple of seconds to read and fill this form.
+    // A submit that arrives faster than that is almost certainly an automated bot — drop it silently.
+    if (Date.now() - pageLoadedAt < 2500) return;
+
+    // Cooldown: block rapid repeat submissions from the same browser session.
+    try {
+      const last = sessionStorage.getItem('jlmv-last-submit');
+      if (last && Date.now() - Number(last) < 30000){
+        formSuccess.style.display = 'none';
+        formError.textContent = 'Você já enviou um cadastro há pouco. Aguarde um instante ou fale direto pelo WhatsApp.';
+        formError.style.display = 'block';
+        return;
+      }
+    } catch (err) {}
+
     const nome = document.getElementById('nome').value.trim();
     const telefone = document.getElementById('telefone').value.trim();
+    const email = document.getElementById('email').value.trim();
 
     formSuccess.style.display = 'none';
     if (!nome || !telefone){
       formError.textContent = 'Preencha nome e telefone para enviar o cadastro.';
       formError.style.display = 'block';
       (!nome ? document.getElementById('nome') : document.getElementById('telefone')).focus();
+      return;
+    }
+    if (email && !EMAIL_RE.test(email)){
+      formError.textContent = 'Confira o e-mail informado — o formato parece incorreto.';
+      formError.style.display = 'block';
+      document.getElementById('email').focus();
       return;
     }
     formError.style.display = 'none';
@@ -82,6 +106,7 @@
       if (response.ok){
         form.reset();
         formSuccess.style.display = 'block';
+        try { sessionStorage.setItem('jlmv-last-submit', String(Date.now())); } catch (err) {}
       } else {
         throw new Error('resposta não ok');
       }

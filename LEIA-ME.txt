@@ -1,0 +1,46 @@
+JLMV Assessoria e Projetos Rurais — site institucional
+========================================================
+
+O QUE TEM NESTA PASTA
+----------------------
+- index.html      -> a página do site (abra este arquivo no navegador)
+- style.css        -> todo o visual (cores, fontes, layout)
+- script.js        -> as animações e o envio do formulário
+- assets/          -> logo e ícone da marca (não são usados pelo index.html,
+                       que já traz as imagens embutidas — ficam aqui só como
+                       arquivo de imagem, caso precise para redes sociais,
+                       impressos etc.)
+
+COMO ABRIR
+-----------
+Dê duplo clique no arquivo "index.html". Ele abre direto no seu navegador
+(Chrome, Edge, etc.), já com a logo, as animações e o formulário funcionando.
+
+Se quiser editar o texto ou as cores, abra os arquivos com qualquer editor
+de texto (Bloco de Notas, VS Code, etc.):
+- Textos e estrutura   -> index.html
+- Cores, fontes, layout -> style.css
+- Comportamento (menu, formulário, tema claro/escuro) -> script.js
+
+CADASTRO DE CLIENTES
+----------------------
+O formulário de "Cadastre sua propriedade" envia os dados direto para o
+Formspree (https://formspree.io/f/maenwoao), que manda um e-mail para você
+a cada novo cadastro. Para ver ou exportar todos os cadastros recebidos,
+acesse sua conta em formspree.io.
+
+Recomendação: no painel do Formspree, em Settings > Spam Filter, você pode
+ativar o reCAPTCHA deles para reforçar ainda mais a proteção contra bots.
+
+CONTATO CONFIGURADO NO SITE
+------------------------------
+E-mail:            jlmvrural@gmail.com
+Telefone/WhatsApp: (73) 99911-1490
+
+PUBLICANDO O SITE DE VERDADE (colocar no ar)
+-----------------------------------------------
+Este é um site estático (só HTML/CSS/JS), então ele funciona em qualquer
+serviço de hospedagem simples, por exemplo:
+- Netlify ou Vercel (arraste a pasta e pronto, tem plano gratuito)
+- Hospedagem compartilhada comum, via FTP
+Se quiser, é só me chamar de novo que eu te ajudo a colocar no ar.
